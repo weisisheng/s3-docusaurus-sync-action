@@ -38,7 +38,7 @@ aws_secret_access_key = ${AWS_SECRET_ACCESS_KEY}" > ~/.aws/credentials
 
 
 echo "Change directory to Source"
-cd ${DIST_DIR}
+cd ${SOURCE_DIR}
 # doesnt work
 # cd ./build/${PROJECT_NAME}
 #cd ${PROJECT_NAME}
