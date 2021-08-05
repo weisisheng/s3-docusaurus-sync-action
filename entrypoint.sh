@@ -22,15 +22,15 @@ if [ -z "$AWS_DEFAULT_REGION" ]; then
   exit 1
 fi
 
-if [ -z "$SOURCE_DIR" ]; then
-  echo "SOURCE_DIR is not set. Quitting."
-  exit 1
-fi
+# if [ -z "$SOURCE_DIR" ]; then
+#   echo "SOURCE_DIR is not set. Quitting."
+#   exit 1
+# fi
 
-if [ -z "$DIST_DIR" ]; then
-  echo "DIST_DIR is not set. Quitting."
-  exit 1
-fi
+# if [ -z "$DIST_DIR" ]; then
+#   echo "DIST_DIR is not set. Quitting."
+#   exit 1
+# fi
 
 
 if [ -z "$PROJECT_NAME" ]; then
@@ -46,13 +46,15 @@ echo "[default]
 aws_access_key_id = ${AWS_ACCESS_KEY_ID}
 aws_secret_access_key = ${AWS_SECRET_ACCESS_KEY}" > ~/.aws/credentials
 
-
 echo "Change directory to Source"
 # runs but doesn't find build lower down
 #cd ${SOURCE_DIR}
+
 # try this next...
 # Change into the build directory
-cd $BUILD_DIR;
+# this doesn't work
+#cd $BUILD_DIR;
+
 # doesnt work
 # cd ./build/${PROJECT_NAME}
 #cd ${PROJECT_NAME}
@@ -62,6 +64,9 @@ cd $BUILD_DIR;
 # Create the project root / try this
 # RUN mkdir -p website
 # WORKDIR /usr/src/project_root
+
+# trying to remove this completely based on this
+# https://evantay.com/blog/docusaurus-gh-action/
 # cd website
 
 echo "Install yarn"
@@ -74,7 +79,10 @@ echo "Run yarn build"
 yarn run build
 
 echo "Copying to website folder"
-aws s3 sync ./build/${PROJECT_NAME} s3://${AWS_S3_BUCKET} --exact-timestamps --delete --region ${AWS_DEFAULT_REGION} $*
+
+# https://evantay.com/blog/docusaurus-gh-action/
+aws s3 sync build/${PROJECT_NAME} s3://${AWS_S3_BUCKET} --exact-timestamps --delete --region ${AWS_DEFAULT_REGION} $*
+#aws s3 sync ./build/${PROJECT_NAME} s3://${AWS_S3_BUCKET} --exact-timestamps --delete --region ${AWS_DEFAULT_REGION} $*
 
 echo "Cleaning up things"
 
