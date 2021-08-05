@@ -38,7 +38,7 @@ aws_secret_access_key = ${AWS_SECRET_ACCESS_KEY}" > ~/.aws/credentials
 
 
 echo "Change directory to Source"
-# cd website
+cd website
 # doesnt work
 # cd ./build/${PROJECT_NAME}
 #cd ${PROJECT_NAME}
@@ -46,9 +46,9 @@ echo "Change directory to Source"
 # WORKDIR /website
 
 # Create the project root / try this
-RUN mkdir -p website
+# RUN mkdir -p website
 # WORKDIR /usr/src/project_root
-cd website
+# cd website
 
 echo "Install yarn"
 npm install -g yarn
