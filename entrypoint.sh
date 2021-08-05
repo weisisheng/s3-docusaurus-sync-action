@@ -38,7 +38,8 @@ aws_secret_access_key = ${AWS_SECRET_ACCESS_KEY}" > ~/.aws/credentials
 
 
 echo "Change directory to Source"
-cd website
+# cd website
+cd ./build/${PROJECT_NAME}
 
 echo "Install yarn"
 npm install -g yarn
