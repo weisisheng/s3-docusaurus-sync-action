@@ -50,7 +50,6 @@ RUN mkdir -p website
 # WORKDIR /usr/src/project_root
 cd website
 
-
 echo "Install yarn"
 npm install -g yarn
 
